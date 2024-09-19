@@ -221,3 +221,5 @@ src.old/
 args4j
 .vscode
 policy.txt
+
+/sass/*
