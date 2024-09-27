@@ -27,14 +27,6 @@
     </properties>
 
     <dependencies>
-        <!-- https://mvnrepository.com/artifact/junit/junit -->
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.12</version>
-            <scope>test</scope>
-        </dependency>
-
         <!-- https://commons.apache.org/proper/commons-io/ -->
         <dependency>
             <groupId>commons-io</groupId>
@@ -48,15 +40,11 @@
             <version>2.33</version>
             <!-- <type>bundle</type> -->
         </dependency>
-
-
     </dependencies>
-
 
     <build>
         <plugins>
-            <!--Plugin to compile sources
-                https://maven.apache.org/plugins/maven-compiler-plugin/ -->
+            <!-- Plugin to compile sources -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -64,19 +52,6 @@
                 <configuration>
                     <source>${java.version}</source>
                     <target>${java.version}</target>
-                    <testTarget>${java.version}</testTarget>
-                </configuration>
-            </plugin>
-
-            <!-- Plugin to run tests
-                https://maven.apache.org/surefire/maven-surefire-plugin/
-             -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>2.5</version>
-                <configuration>
-                    <argLine>-Xmx4g -Xmx4g</argLine>
                 </configuration>
             </plugin>
 
@@ -94,52 +69,47 @@
                 </configuration>
             </plugin>
 
-            <!--To produce a jar file
-                https://maven.apache.org/shared/maven-archiver/examples/classpath.html
-             -->
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-jar-plugin</artifactId>
-                    <configuration>
-                        <archive>
-                            <manifest>
-                                <addClasspath>true</addClasspath>
-                                <mainClass>${boot.class}</mainClass>
-                            </manifest>
-                        </archive>
-                    </configuration>
-                </plugin>
+            <!-- To produce a jar file -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <addClasspath>true</addClasspath>
+                            <mainClass>${boot.class}</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
 
-                <!--To build distributable files (JAR)
-                https://maven.apache.org/plugins/maven-assembly-plugin/
-                -->
-                <plugin>
-                    <artifactId>maven-assembly-plugin</artifactId>
-                    <version>3.4.2</version>
-                    <configuration>
-                        <archive>
-                            <manifest>
-                                <addClasspath>true</addClasspath>
-                                <mainClass>${boot.class}</mainClass>
-                            </manifest>
-                        </archive>
-                        <descriptorRefs>
-                            <descriptorRef>jar-with-dependencies</descriptorRef>
-                        </descriptorRefs>
-                    </configuration>
-                    <executions>
-                        <execution>
-                            <id>make-my-jar-with-dependencies</id>
-                            <phase>package</phase>
-                            <goals>
-                                <goal>single</goal>
-                            </goals>
-                        </execution>
-                    </executions>
-                </plugin>
+            <!-- To build distributable files (JAR) -->
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>3.4.2</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <addClasspath>true</addClasspath>
+                            <mainClass>${boot.class}</mainClass>
+                        </manifest>
+                    </archive>
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>make-my-jar-with-dependencies</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
 
-
-            </plugins>
+        </plugins>
     </build>
 
 </project>
